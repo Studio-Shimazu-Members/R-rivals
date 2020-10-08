@@ -7,17 +7,17 @@ public class CardGenerater : MonoBehaviour
     [SerializeField] Card cardPrefab;
     // Cardの生成：Prefabを生成すればいい
 
-    private void Start()
+    // どこからでも使えるようにする
+    public static CardGenerater instance;
+    private void Awake()
     {
-        for (int i=0; i<8; i++)
-        {
-            Spawn(i);
-        }
+        instance = this;
     }
 
-    public void Spawn(int number)
+    public Card Spawn(int number)
     {
         Card card = Instantiate(cardPrefab);
         card.Init(number);
+        return card;
     }
 }
