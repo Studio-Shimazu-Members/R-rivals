@@ -5,16 +5,19 @@ using UnityEngine;
 public class CardGenerater : MonoBehaviour
 {
     [SerializeField] Card cardPrefab;
-    public static CardGenerater instance;
-    public void Awake()
+    // Cardの生成：Prefabを生成すればいい
+
+    private void Start()
     {
-        instance = this;
+        for (int i=0; i<8; i++)
+        {
+            Spawn(i);
+        }
     }
 
-    public Card Spawn(int number, Player.PlayerID owner)
+    public void Spawn(int number)
     {
         Card card = Instantiate(cardPrefab);
-        card.Setting(number, owner);
-        return card;
+        card.Init(number);
     }
 }
