@@ -13,6 +13,7 @@ public class GameMaster : MonoBehaviour
     //・次の対戦
 
     [SerializeField] Player[] players;
+    [SerializeField] AIInput ai;
 
     private void Start()
     {
@@ -22,6 +23,8 @@ public class GameMaster : MonoBehaviour
         }
 
         CallSettingHand();
+
+        ai.Action();
     }
 
     // 手札を準備させる
