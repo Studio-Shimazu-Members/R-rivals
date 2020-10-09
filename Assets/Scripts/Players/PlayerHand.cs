@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour
 {
+    // TODO:バグ
+    // ・カード選択をしたときに、handのcardsが手札からなくならない
+    // ・カード選択をしたときに、選択していたカードが手札に戻らない
+
     // 手札のカードを保持する
-    List<Card> cards = new List<Card>();
+    [SerializeField] List<Card> cards = new List<Card>();
 
     // 最初にPlayerから手札を受け取る
     public void SetHandCards(List<Card> cards)
@@ -17,6 +21,7 @@ public class PlayerHand : MonoBehaviour
     // 手札を整列する
     void RefreshHand()
     {
+        cards.Sort((cardA, cardB) => cardA.number - cardB.number);
         for (int i=0; i< cards.Count; i++)
         {
             Card card = cards[i];
@@ -27,6 +32,20 @@ public class PlayerHand : MonoBehaviour
             card.transform.localPosition = new Vector3(x*1.2f, 0, 0);
 
         }
-
     }
+
+    // 選択したカードを手札から抜き取る
+    public void Remove(Card card)
+    {
+        cards.Remove(card);
+        RefreshHand();
+    }
+
+    // 選択していたカードを手札に加える
+    public void Add(Card card)
+    {
+        cards.Add(card);
+        RefreshHand();
+    }
+
 }
