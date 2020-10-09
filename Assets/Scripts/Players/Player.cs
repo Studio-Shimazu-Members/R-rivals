@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
@@ -9,13 +10,11 @@ public class Player : MonoBehaviour
     [SerializeField] SelectCardPosition selectCardPosition;
 
     Card selectCard; // 選択したカード
-    void Start()
-    {
-        SetupHand();
-    }
+
+    public UnityAction OnSubmitAction;
 
     // 手札の用意：カードの生成
-    void SetupHand()
+    public void SetupHand()
     {
         List<Card> cards = new List<Card>();
         for (int i=0; i<8; i++)
@@ -43,6 +42,8 @@ public class Player : MonoBehaviour
     // 決定ボタンを押したら、GameMasterに通知する
     public void SubmitCard()
     {
+        // GameMasterの関数を実行できれば提出したことを知らせることができる
+        OnSubmitAction.Invoke();
     }
 
 }
