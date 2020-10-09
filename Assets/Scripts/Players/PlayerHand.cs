@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlayerHand : MonoBehaviour
 {
+    // TODO:バグ
+    // ・カード選択をしたときに、選択していたカードが手札に戻らない
+    // ・カード選択をしたときに、handのcardsが手札からなくならない
+
     // 手札のカードを保持する
-    List<Card> cards = new List<Card>();
+    [SerializeField] List<Card> cards = new List<Card>();
 
     // 最初にPlayerから手札を受け取る
     public void SetHandCards(List<Card> cards)

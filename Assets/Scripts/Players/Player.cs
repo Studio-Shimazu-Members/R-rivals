@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
 
     [SerializeField] PlayerHand hand;// 手札を整列する
+    [SerializeField] SelectCardPosition selectCardPosition;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     public void SelectCard(Card card)
     {
         Debug.Log("SelectCard:"+card.number);
+        selectCardPosition.SetCard(card);
     }
 
     // 決定ボタンを押したら、GameMasterに通知する
