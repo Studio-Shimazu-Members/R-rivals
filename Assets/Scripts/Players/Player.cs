@@ -12,6 +12,20 @@ public class Player : MonoBehaviour
     Card selectCard; // 選択したカード
 
     public UnityAction OnSubmitAction;
+    public bool submitted;
+
+    public Card SubmittedCard
+    {
+        get { return selectCard; }
+    }
+    /*
+    public Card SubmittedCardFunc()
+    {
+        return selectCard;
+    }
+    */
+
+
 
     // 手札の用意：カードの生成
     public void SetupHand()
@@ -42,6 +56,7 @@ public class Player : MonoBehaviour
     // 決定ボタンを押したら、GameMasterに通知する
     public void SubmitCard()
     {
+        submitted = true;
         Debug.Log("提出カード"+selectCard.number);
         // GameMasterの関数を実行できれば提出したことを知らせることができる
         OnSubmitAction.Invoke();

@@ -12,6 +12,10 @@ public class GameMaster : MonoBehaviour
     //・カードの削除
     //・次の対戦
 
+    // TODO:
+    // ・PlayerとAIがカードを出したら
+    // ・判定：数字の大きい方が勝ち
+
     [SerializeField] Player[] players;
     [SerializeField] AIInput ai;
 
@@ -24,7 +28,7 @@ public class GameMaster : MonoBehaviour
 
         CallSettingHand();
 
-        ai.Action();
+        //ai.Action(); // 先に出すならここに書く
     }
 
     // 手札を準備させる
@@ -41,18 +45,45 @@ public class GameMaster : MonoBehaviour
     public void OnSubmitCard()
     {
         Debug.Log("Playerがカードを提出");
+        // 両者がカードを出していれば、判定
+        if (IsCompletedSubmit())
+        {
+            Battle();
+        }
+        else
+        {
+            ai.Action();
+        }
     }
 
     // 提出確認
     bool IsCompletedSubmit()
     {
-        return true;
+        if (players[0].submitted && players[1].submitted)
+        {
+            return true;
+        }
+        return false;
     }
 
     // 判定
     void Battle()
     {
-
+        Debug.Log("判定");
+        int player1Card = players[0].SubmittedCard.number;
+        int player2Card = players[1].SubmittedCard.number;
+        if (player1Card > player2Card)
+        {
+            Debug.Log("勝ち");
+        }
+        else if(player1Card < player2Card)
+        {
+            Debug.Log("負け");
+        }
+        else
+        {
+            Debug.Log("引き分け");
+        }
     }
 
     // 場のカードを捨てる
