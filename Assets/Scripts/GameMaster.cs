@@ -13,8 +13,8 @@ public class GameMaster : MonoBehaviour
     //・次の対戦
 
     // TODO:
-    // ・PlayerとAIがカードを出したら
-    // ・判定：数字の大きい方が勝ち
+    // ・カードを捨てる
+    // ・次のゲームの準備をする
 
     [SerializeField] Player[] players;
     [SerializeField] AIInput ai;
@@ -48,7 +48,7 @@ public class GameMaster : MonoBehaviour
         // 両者がカードを出していれば、判定
         if (IsCompletedSubmit())
         {
-            Battle();
+            StartCoroutine(Battle());
         }
         else
         {
@@ -67,7 +67,7 @@ public class GameMaster : MonoBehaviour
     }
 
     // 判定
-    void Battle()
+    IEnumerator Battle()
     {
         Debug.Log("判定");
         int player1Card = players[0].SubmittedCard.number;
@@ -84,11 +84,19 @@ public class GameMaster : MonoBehaviour
         {
             Debug.Log("引き分け");
         }
+        //Invoke("NextSetting",1f);
+        yield return new WaitForSeconds(1f);
+        NextSetting();
     }
 
     // 場のカードを捨てる
     void NextSetting()
     {
-
+        foreach(Player player in players)
+        {
+            player.DestroySubmitCard();
+        }
+        // players[0].DestroySubmitCard();
+        // players[1].DestroySubmitCard();
     }
 }

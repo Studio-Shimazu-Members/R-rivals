@@ -68,4 +68,10 @@ public class Player : MonoBehaviour
         Card card = hand.RandomSelect();
         SelectCard(card);
     }
+
+    public void DestroySubmitCard()
+    {
+        submitted = false;
+        Destroy(selectCard.gameObject);
+    }
 }
