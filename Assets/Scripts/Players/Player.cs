@@ -42,8 +42,15 @@ public class Player : MonoBehaviour
     // 決定ボタンを押したら、GameMasterに通知する
     public void SubmitCard()
     {
+        Debug.Log("提出カード"+selectCard.number);
         // GameMasterの関数を実行できれば提出したことを知らせることができる
         OnSubmitAction.Invoke();
     }
 
+    public void RandomSelectCard()
+    {
+        // 手札からランダムに選ぶ
+        Card card = hand.RandomSelect();
+        SelectCard(card);
+    }
 }

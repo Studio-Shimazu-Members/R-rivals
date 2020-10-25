@@ -34,6 +34,15 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
+    public Card RandomSelect()
+    {
+        int r = Random.Range(0, cards.Count);
+        Card card = cards[r];
+        Remove(card);
+        return card;
+    }
+
+
     // 選択したカードを手札から抜き取る
     public void Remove(Card card)
     {
